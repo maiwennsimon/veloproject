@@ -1,0 +1,47 @@
+{% load static %}
+
+<html>
+            <head>
+                <meta charset="utf-8">
+                <title>Our Bike Website</title>
+                <link rel="stylesheet" href="{% static 'polls/styles.css' %}"/>
+                </head>
+            <body>
+             <div class="bloc1">
+                <div class="left">
+                    <h1>The Bike Website</h1>
+                </div>
+                <div class="right">
+                    <mark><a class="rl" href="{% url 'bike-add' %}">Add a Bike</a></mark>
+                    <mark><a class="rr" href="{% url 'contact' %}">Contact Us</a></mark>
+                </div>
+
+            </div>
+                <h2>Made by Yan Meddour and Maïwenn Simon</h2>
+                <p> The list of bikes available:</p>
+
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Color</th>
+                        <th>Brand</th>
+                    </tr>
+                        {% for bike in bikes %}
+                            <tr>
+                                <th>{{bike.id}}</th>
+                                <th><a href="{% url 'bike-detail' bike.id %}">{{ bike.color }}</a></th>
+                                <th>{{bike.brand}}</th>
+                            </tr>
+                        {% endfor %}
+                </table>
+
+                {% extends 'base.html' %}
+{% block content %}
+    <h2>Photos</h2>
+    {% for photo in photos %}
+        <img src="{{ photo.image.url }}">
+        <p>{{ photo.caption }}</p>
+    {% endfor %}
+{% endblock content %}
+            </body>
+</html>
