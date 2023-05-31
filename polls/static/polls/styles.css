@@ -1,0 +1,52 @@
+body {
+  background: linen;
+}
+
+  h1 {
+    color: blue;
+    display: flex;
+  }
+
+  .bloc1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bloc1 .left {
+    display: flex;
+    align-items: center;
+  }
+
+  .bloc1 .left h1 {
+    display: inline;
+  }
+
+  .bloc1 .right div{
+    position: absolute;
+    justify-content: right;
+  }
+
+  .bloc1 .right .rr {
+    border: 10px solid lightcoral;
+    border-radius: 5px;
+    justify-content: right;
+    color: aliceblue;
+    text-decoration: none;
+  }
+
+  .bloc1 .right .rl {
+    border: 10px solid lightcoral;
+    border-radius: 5px;
+    justify-content: right;
+    color: aliceblue;
+    text-decoration: none;
+  }
+
+  .bloc1 .right mark {
+      background-color: lightcoral;
+  }
+
+  h2 {
+    color: red;
+  }
