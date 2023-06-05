@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from polls.models import Bike, User
+from polls.models import Bike, CustomUser
 from django.contrib.admin.models import LogEntry
 
 
@@ -9,5 +9,5 @@ class BikeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Bike, BikeAdmin)
-admin.site.register(User)
+admin.site.register(CustomUser)
 admin.site.register(LogEntry)

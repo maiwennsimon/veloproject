@@ -67,8 +67,7 @@ TEMPLATES = [
     },
 ]
 
-LANGUAGE_CODE = 'fr-fr'
-#AUTH_USER_MODEL = 'polls.User'
+#AUTH_USER_MODEL = 'polls.CustomUser'
 
 WSGI_APPLICATION = 'djangoProject.wsgi.application'
 

@@ -43,6 +43,23 @@ body {
     text-decoration: none;
   }
 
+  .bloc1 .right .lr {
+    border: 10px solid lightcoral;
+    border-radius: 5px;
+    justify-content: right;
+    color: aliceblue;
+    text-decoration: none;
+  }
+
+  .bloc1 .right .ll {
+    border: 10px solid lightcoral;
+    border-radius: 5px;
+    justify-content: right;
+    color: aliceblue;
+    text-decoration: none;
+  }
+
+
   .bloc1 .right mark {
       background-color: lightcoral;
   }

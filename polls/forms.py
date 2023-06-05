@@ -1,5 +1,6 @@
 from django import forms
-from polls.models import Bike
+from polls.models import Bike, CustomUser
+from django.contrib.auth.forms import UserCreationForm
 
 
 class ContactUsForm(forms.Form):
@@ -15,5 +16,12 @@ class BikeAddForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=63, label='Nom d’utilisateur')
-    password = forms.CharField(max_length=63, widget=forms.PasswordInput, label='Mot de passe')
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
+class RegistrationForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'password1', 'password2']
+

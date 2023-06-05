@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LOGIN</title>
+    <title>Register</title>
 </head>
 <body>
 {% block content %}
@@ -10,7 +10,7 @@
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" >Login</button>
+        <button type="submit" >Create Account</button>
     </form>
 {% endblock content %}
 </body>

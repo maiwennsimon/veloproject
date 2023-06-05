@@ -1,12 +1,14 @@
+import hashlib
+
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from .utils import send_mail_to_client
-
+from django.contrib import sessions
 # Create your views here.
 from django.http import HttpResponse
-from polls.models import Bike
-from polls.forms import BikeAddForm, ContactUsForm, LoginForm
+from polls.models import Bike, CustomUser
+from polls.forms import BikeAddForm, ContactUsForm, LoginForm, RegistrationForm
 
 
 def index(request):
@@ -58,12 +60,30 @@ def login_page(request):
             if user is not None:
                 login(request, user)
                 message = f'Bonjour, {user.username}! Vous êtes connecté.'
+                return redirect("/polls/bikes")
             else:
                 message = 'Identifiants invalides.'
     return render(request, 'polls/login.html', context={'form': form})
 
 
 def create_account(request):
-    form = LoginForm()
+    form = RegistrationForm()
+    if request.session.get('username'):
+        return render(request, 'polls/register.html', context={'form': form})
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            try:
+                CustomUser.objects.get(username=username)
+                return render(request, 'polls/register.html', context={'form': form})
+            except CustomUser.DoesNotExist:
+                pass
+
+            # Use Django's built-in authentication system to handle password hashing
+            user = form.save()
+            login(request, user)
+            message = f'Bonjour, {user.username}! Votre compte a été créé.'
+            return redirect('/polls/bikes')  # Replace 'home' with your desired URL or view name
+
+    return render(request, 'polls/register.html', context={'form': form})
