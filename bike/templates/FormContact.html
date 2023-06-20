@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact forms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
+
+body{
+    background-color: bisque;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+form{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+form h1{
+    font-size: 20px;
+}
+
+form .trait{
+    width: 100%;
+    height: 1px;
+    background-color: cornflowerblue;
+}
+
+form .bodyform{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+form  .bodyform .groupe{
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+form .bodyform .left .groupe input{
+    margin-top: 5px;
+    padding: 10px 5px 10px 30px ;
+    border: 1px solid cornflowerblue;
+    outline-color: red;
+    border-radius: 5px;
+}
+
+form .bodyform .left .groupe i{
+    position: absolute;
+    left: 0;
+    top: 25px;
+    padding: 9px 0px;
+    color: cornflowerblue;
+}
+
+form .bodyform .right{
+    margin-left: 40px;
+}
+
+form .bodyform .right .groupe{
+    height: 100%;
+}
+
+form .bodyform .right .groupe textarea{
+    margin-top: 5px;
+    padding: 10px;
+    color: gray;
+    border: 2px solid cornflowerblue;
+    outline: none;
+    border-radius: 5px;
+    resize: none;
+    height: 72%;
+}
+
+form .footerForm button{
+    margin-top: 10px;
+    background-color: steelblue;
+    font-size:  15px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.5s;
+    border-radius: 5px;
+
+}
+
+form .footerForm button:hover{
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 640px) {
+    form .bodyform .right{
+        margin-left: 0px;
+    }
+
+
+}
+</style>
+</head>
+<body>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

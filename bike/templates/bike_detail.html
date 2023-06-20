@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class="container mt-5 pt-5">
+    <div class="row search-card-result">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-5">
+            <h5>{{ bikes_obj.brand }}</h5>
+            <p>{{ bikes_obj.description|truncatechars:150 }}</p>
+        </div>
+        <div class="col-md-2 border-left text-center more-offers">
+            <p>${{bike_obj.bike_price}}</p>
+            <p>{{bike_obj.description}}</p>
+        </div>
+
+    </div>
+    <div class="row">
+        {% for image in bike_obj.images.all %}
+        <a href="/bike_detail/{{ bike_obj.uid }}">
+            <img class="img-fluid" src="{{ image.images.url }}" alt="Image du vélo">
+        </a>
+        {% endfor %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="filter-card">
+        <h5>Book Bike</h5>
+        {% include "messages.html" %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label for="checkin">Check in</label>
+                    <p>
+                        <input type="date" name="checkin" id="checkin" class="form-control">
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <label for="checkout">Check out</label>
+                    <p>
+                        <input type="date" name="checkout" id="checkout" class="form-control">
+                    </p>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-block" value="Book">
+                </div>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <a href="/login/" class="btn btn-primary mt-5">Login</a>
+    {% endif %}
+</div>
+{% endblock %}

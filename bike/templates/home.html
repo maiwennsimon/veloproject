@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{%  block start %}
+
+<section class="colorful jumbotron mb-0" role="banner">
+    <nav class="navbar navbar-expand-lg justify-content-between navbar-dark" role="navigation">
+        <div class="navbar-brand">
+            <a href="index.html">Bike
+                <em>.</em>
+            </a>
+            <div class="right">
+                <mark><a class="rr" href="{% url 'contact' %}">Contact Us</a></mark>
+                <mark><a class="rr" href="{% url 'login_page' %}">Login</a></mark>
+                <mark><a class="rr" href="{% url 'register_page' %}">Register</a></mark>
+
+            </div>
+
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </nav>
+
+
+{% if request.user.is_authenticated %}
+    <p>TERVETULOA, {{ request.user.username }}! You are connected!</p>
+    <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+{% else %}
+    <p>You are not logged In.</p>
+{% endif %}
+
+
+    <div class="container bikes-container">
+
+        <div class="row mt-2 justify-content-between">
+            <div class="col-md-8 text-white align-self-center mb-2 p-4">
+                <h1>Bike Project</h1>
+                <span class=""> Welcome to our website. Yan and Maiwenn rent bikes for student of kokkola
+                </span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="search-container mb-5 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="row my-3">
+
+                </div>
+                <div class="row mt-2 justify-content-between">
+                    <div class="filter-card">
+                        <h5>Filter</h5>
+                        <form action="#">
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label for="mintopay">rental start date</label>
+                                    <p>
+                                        <input type="date" name="checkin" id="checkin" class="form-control">
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="maxtopay">rental end date</label>
+                                    <p>
+                                        <input type="date" name="checkout" id="checkout" class="form-control">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-primary btn-block" value="Limit">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-9  px-4 mb-5">
+                <form>
+                <div class="row mt-3">
+
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label class="" for="exampleFormControlSelect1">Search</label>
+                            <input name="search" class="form-control" value="" placeholder="Search">
+                        </div>
+
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+
+                            <button style="margin-top: 30px;" type="submit" class="btn btn-success">Find</button>
+                        </div>
+                </div>
+                </form>
+
+
+
+            {% for bike_obj in bike_objs %}
+
+                <div class="row search-card-result">
+
+  <h2>{{ bike_obj.brand }}</h2>
+            <p>{{ bike_obj.description }}</p>
+
+                    <div class="col-md-3">
+                        <p>${{bike_obj.bike_price}}</p>
+
+                        {% for image in bike_obj.images.all %}
+                        <a href="/bike_detail/{{ bike_obj.uid }}">
+                            <img class="img-fluid" src="{{ image.images.url }}" alt="Image du vélo">
+                        </a>
+
+                    <div class="col-md-5">
+                        <h5>{{bikes_obj.brand}}</h5>
+
+                        <p>
+                            {{bikes_obj.description|truncatechars:150}}
+
+                        </p>
+
+                    </div>
+                    {% endfor %}
+
+                    </div>
+
+
+                    <div class="col-md-2 border-left text-center more-offers">
+
+
+                        <div class="btn btn-success">View bike </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
